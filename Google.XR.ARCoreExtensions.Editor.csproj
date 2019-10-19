@@ -71,11 +71,11 @@
     <Compile Include="C:\Users\Andrei\Downloads\arcore-unity-extensions-1.12.0\package\Editor\Scripts\Internal\SceneUtils.cs" />
     <Compile Include="C:\Users\Andrei\Downloads\arcore-unity-extensions-1.12.0\package\Editor\Scripts\Internal\ShellHelper.cs" />
     <None Include="C:\Users\Andrei\Downloads\arcore-unity-extensions-1.12.0\package\Editor\Google.XR.ARCoreExtensions.Editor.asmdef" />
-    <Reference Include="UnityEngine.UI">
-      <HintPath>C:/Users/Andrei/Unity/Chess/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>C:/Users/Andrei/Unity/Chess/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>C:/Users/Andrei/Unity/Chess/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.TestRunner">
       <HintPath>C:/Users/Andrei/Unity/Chess/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>

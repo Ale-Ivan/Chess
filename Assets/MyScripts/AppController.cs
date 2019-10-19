@@ -12,7 +12,6 @@ public class AppController : MonoBehaviour
 
     public ARReferencePointManager ReferencePointManager;
     public ARRaycastManager RaycastManager;
-    public InputField InputField;
     public Text OutputText;
 
     private enum AppMode
@@ -21,42 +20,19 @@ public class AppController : MonoBehaviour
         TouchToHostCloudReferencePoint,
 
         // Poll hosted point state until it is ready to use.
-        WaitingForHostedReferencePoint,
-
-        // Wait for user to tap screen to begin resolving the point.
-        TouchToResolveCloudReferencePoint,
-
-        // Poll resolving point state until it is ready to use.
-        WaitingForResolvedReferencePoint,
+        WaitingForHostedReferencePoint
     }
 
     private AppMode m_AppMode = AppMode.TouchToHostCloudReferencePoint;
     private ARCloudReferencePoint m_CloudReferencePoint;
-    private string m_CloudReferenceId;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        InputField.onEndEdit.AddListener(OnInputEndEdit);
+        
     }
 
-    private void OnInputEndEdit(string text)
-    {
-        m_CloudReferenceId = string.Empty;
-
-        m_CloudReferencePoint =
-            ReferencePointManager.ResolveCloudReferenceId(text);
-        if (m_CloudReferencePoint == null)
-        {
-            OutputText.text = "Resolve Failed!";
-            m_AppMode = AppMode.TouchToHostCloudReferencePoint;
-            return;
-        }
-
-        // Wait for the reference point to be ready.
-        m_AppMode = AppMode.WaitingForResolvedReferencePoint;
-    }
 
     // Update is called once per frame
     void Update()
@@ -112,59 +88,6 @@ public class AppController : MonoBehaviour
                                              Quaternion.identity);
                 cloudAnchor.transform.SetParent(
                     m_CloudReferencePoint.transform, false);
-
-                m_CloudReferenceId = m_CloudReferencePoint.cloudReferenceId;
-                m_CloudReferencePoint = null;
-
-                m_AppMode = AppMode.TouchToResolveCloudReferencePoint;
-            }
-        }
-        else if (m_AppMode == AppMode.TouchToResolveCloudReferencePoint)
-        {
-            OutputText.text = m_CloudReferenceId;
-
-            if (Input.touchCount >= 1
-                && Input.GetTouch(0).phase == TouchPhase.Began
-                && !EventSystem.current.IsPointerOverGameObject(
-                        Input.GetTouch(0).fingerId))
-            {
-                m_CloudReferencePoint =
-                    ReferencePointManager.ResolveCloudReferenceId(
-                        m_CloudReferenceId);
-                if (m_CloudReferencePoint == null)
-                {
-                    OutputText.text = "Resolve Failed!";
-                    m_CloudReferenceId = string.Empty;
-                    m_AppMode = AppMode.TouchToHostCloudReferencePoint;
-                    return;
-                }
-
-                m_CloudReferenceId = string.Empty;
-
-                // Wait for the reference point to be ready.
-                m_AppMode = AppMode.WaitingForResolvedReferencePoint;
-            }
-        }
-        else if (m_AppMode == AppMode.WaitingForResolvedReferencePoint)
-        {
-            OutputText.text = m_AppMode.ToString();
-
-            CloudReferenceState cloudReferenceState =
-                m_CloudReferencePoint.cloudReferenceState;
-            OutputText.text += " - " + cloudReferenceState.ToString();
-
-            if (cloudReferenceState == CloudReferenceState.Success)
-            {
-                GameObject cloudAnchor = Instantiate(
-                                             ResolvedPointPrefab,
-                                             Vector3.zero,
-                                             Quaternion.identity);
-                cloudAnchor.transform.SetParent(
-                    m_CloudReferencePoint.transform, false);
-
-                m_CloudReferencePoint = null;
-
-                m_AppMode = AppMode.TouchToHostCloudReferencePoint;
             }
         }
     }

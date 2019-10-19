@@ -65,9 +65,11 @@
   <ItemGroup>
     <Compile Include="Assets\MyScripts\AppController.cs" />
     <Compile Include="Assets\MyScripts\ChessBoard.cs" />
+    <Compile Include="Assets\MyScripts\ChessBoardInitializer.cs" />
     <Compile Include="Assets\MyScripts\Geometry.cs" />
     <Compile Include="Assets\MyScripts\LoadScene.cs" />
     <Compile Include="Assets\MyScripts\Player.cs" />
+    <Compile Include="Assets\MyScripts\TileSelector.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/Andrei/Unity/Chess/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

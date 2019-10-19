@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4340020414422934}
   - component: {fileID: 33895511775729906}
   - component: {fileID: 23846803782960038}
-  - component: {fileID: 6920529051283646045}
   m_Layer: 0
   m_Name: board
   m_TagString: Untagged
@@ -27,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1390600257221694}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.002, y: 0, z: -0.003}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.04, y: 0.04, z: 0.04}
   m_Children: []
   m_Father: {fileID: 0}
@@ -79,19 +78,3 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &6920529051283646045
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1390600257221694}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b7c4d850b14635469c2e678ef6c1953, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultMaterial: {fileID: 2100000, guid: ab17313c0276349c991ebdfef634469f, type: 2}
-  blackKing: {fileID: 1822731811085762, guid: cd47671bc858649ed8445e605149f3e8, type: 3}
-  blackKingPositionReference: {fileID: 4087213197106850, guid: cd47671bc858649ed8445e605149f3e8,
-    type: 3}
