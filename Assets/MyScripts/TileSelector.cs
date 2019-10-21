@@ -16,7 +16,6 @@ public class TileSelector : MonoBehaviour
         tileHighlight.SetActive(false);
     }
 
-    // Update is called once per frame
     void Update()
     {
         foreach (Touch touch in Input.touches)
@@ -35,5 +34,10 @@ public class TileSelector : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void select()
+    {
+        this.Update();
     }
 }

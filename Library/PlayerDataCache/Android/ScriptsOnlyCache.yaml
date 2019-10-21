@@ -86,35 +86,35 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10468}
     - Class: 114
-      Script: {instanceID: 10554}
+      Script: {instanceID: 10558}
     - Class: 114
-      Script: {instanceID: 10716}
+      Script: {instanceID: 10692}
     - Class: 114
-      Script: {instanceID: 10992}
+      Script: {instanceID: 10722}
     - Class: 114
-      Script: {instanceID: 11046}
+      Script: {instanceID: 11000}
     - Class: 114
-      Script: {instanceID: 11128}
+      Script: {instanceID: 11054}
     - Class: 114
-      Script: {instanceID: 11146}
+      Script: {instanceID: 11136}
     - Class: 114
-      Script: {instanceID: 11218}
+      Script: {instanceID: 11154}
     - Class: 114
-      Script: {instanceID: 11284}
+      Script: {instanceID: 11226}
     - Class: 114
-      Script: {instanceID: 11328}
+      Script: {instanceID: 11292}
     - Class: 114
-      Script: {instanceID: 11352}
+      Script: {instanceID: 11336}
     - Class: 114
-      Script: {instanceID: 11518}
+      Script: {instanceID: 11360}
     - Class: 114
-      Script: {instanceID: 11656}
+      Script: {instanceID: 11526}
     - Class: 114
-      Script: {instanceID: 11748}
+      Script: {instanceID: 11664}
     - Class: 114
-      Script: {instanceID: 11752}
+      Script: {instanceID: 11756}
     - Class: 114
-      Script: {instanceID: 63932}
+      Script: {instanceID: 11760}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 120
@@ -165,15 +165,15 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10368}
     - Class: 114
-      Script: {instanceID: 10688}
+      Script: {instanceID: 10694}
     - Class: 114
-      Script: {instanceID: 10808}
+      Script: {instanceID: 10816}
     - Class: 114
-      Script: {instanceID: 11328}
+      Script: {instanceID: 11336}
     - Class: 114
-      Script: {instanceID: 11708}
+      Script: {instanceID: 11716}
     - Class: 114
-      Script: {instanceID: 11752}
+      Script: {instanceID: 11760}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -221,7 +221,7 @@ ScriptsOnlyBuild:
     className: TMP_ScrollbarEventHandler
   - hash:
       serializedVersion: 2
-      Hash: d81caa015d0a35524f493c80ba68bf55
+      Hash: ef5e4d282c693fccfbdb56fd1b1de8fc
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: AppController
@@ -479,6 +479,12 @@ ScriptsOnlyBuild:
     className: TMP_SpriteAnimator
   - hash:
       serializedVersion: 2
+      Hash: 1c471afd22d433256fb2d2c3611d5ec3
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: TileSelector
+  - hash:
+      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
@@ -489,6 +495,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.XR.ARFoundation.dll
     namespaceName: UnityEngine.XR.ARFoundation
     className: ARPointCloud
+  - hash:
+      serializedVersion: 2
+      Hash: 10cf0b3f03879baa3382c389af491be5
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ChessBoardInitializer
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -807,18 +819,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
-  - hash:
-      serializedVersion: 2
-      Hash: 10cf0b3f03879baa3382c389af491be5
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: ChessBoardInitializer
-  - hash:
-      serializedVersion: 2
-      Hash: 1c471afd22d433256fb2d2c3611d5ec3
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: TileSelector
   platform: 13
   scenePathNames:
   - Assets/MyScenes/MainMenu.unity
