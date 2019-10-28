@@ -16,6 +16,7 @@ TagManager:
   - WhiteQueen
   - BlackRook
   - WhiteRook
+  - Board
   layers:
   - Default
   - TransparentFX
