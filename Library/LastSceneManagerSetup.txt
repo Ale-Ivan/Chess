@@ -1,17 +1,5 @@
 sceneSetups:
-- path: Assets/MyScenes/MainMenu.unity
-  isLoaded: 0
-  isActive: 0
-  isSubScene: 0
-- path: Assets/MyScenes/MainMenu.unity
-  isLoaded: 0
-  isActive: 0
-  isSubScene: 0
-- path: Assets/MyScenes/MainMenu.unity
-  isLoaded: 0
-  isActive: 0
-  isSubScene: 0
-- path: Assets/MyScenes/Launcher.unity
+- path: Assets/MyScenes/ARScene.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

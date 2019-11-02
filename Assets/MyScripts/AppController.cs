@@ -6,6 +6,10 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 
+//these are used for creating the multiplayer status of the game
+using Photon.Pun;
+using Photon.Realtime;
+
 namespace com.Ale.Chess
 {
     public class AppController : MonoBehaviour
@@ -18,23 +22,30 @@ namespace com.Ale.Chess
         public Text OutputText;
 
         public GameObject tileHighlightPrefab;
-        private GameObject tileHighlight;
+
+        public bool placed = false; //boolean used for checking if the board is placed or not (if true, you cannot place a board anymore)
 
         private enum AppMode
         {
-            // Wait for user to tap screen to begin hosting a point.
+            // Wait for user to tap screen to begin hosting a point. Master Client
             TouchToHostCloudReferencePoint,
 
-            // Poll hosted point state until it is ready to use.
+            // Poll hosted point state until it is ready to use. Master Client
             WaitingForHostedReferencePoint,
 
-            //state where the players can play chess
-            PlayState
+            // Wait for user to tap screen to begin resolving the point. SimpleClient
+            TouchToResolveCloudReferencePoint,
+
+            // Poll resolving point state until it is ready to use. SimpleClient
+            WaitingForResolvedReferencePoint,
+          
+            PlayState //for Master Client and Simple Client
         }
+
 
         private AppMode m_AppMode = AppMode.TouchToHostCloudReferencePoint;
         private ARCloudReferencePoint m_CloudReferencePoint;
-
+        private string m_CloudReferenceId;
 
         // Start is called before the first frame update
         void Start()
@@ -42,9 +53,16 @@ namespace com.Ale.Chess
 
         }
 
-        private void HostCloudReferencePoint()
+        void Awake()
         {
-            OutputText.text = m_AppMode.ToString();
+            // #Critical
+            // this makes sure we can use PhotonNetwork.LoadLevel() on the master client and all clients in the same room sync their level automatically
+            PhotonNetwork.AutomaticallySyncScene = true;
+        }
+
+        private void PlaceChessBoard()
+        {
+            OutputText.text = "Please touch the screen to place the chess board";
 
             if (Input.touchCount >= 1
                 && Input.GetTouch(0).phase == TouchPhase.Began
@@ -56,49 +74,22 @@ namespace com.Ale.Chess
                 if (hitResults.Count > 0)
                 {
                     Pose pose = hitResults[0].pose;
-
-                    // Create a reference point at the touch.
-                    ARReferencePoint referencePoint =
-                        ReferencePointManager.AddReferencePoint(
-                            hitResults[0].pose);
-
-                    // Create Cloud Reference Point.
-                    m_CloudReferencePoint =
-                        ReferencePointManager.AddCloudReferencePoint(
-                            referencePoint);
-                    if (m_CloudReferencePoint == null)
+                    if(placed == false)
                     {
-                        OutputText.text = "Create Failed!";
-                        return;
+                        PhotonNetwork.InstantiateSceneObject(this.HostedPointPrefab.name, pose.position, Quaternion.identity, 0);
+                        placed = true;
+                        m_AppMode = AppMode.PlayState;
                     }
-
-                    // Wait for the reference point to be ready.
-                    m_AppMode = AppMode.WaitingForHostedReferencePoint;
+                    else
+                    {
+                        OutputText.text = "Chess Board already placed, cannot place another one";
+                    }
+                    
                 }
             }
         }
 
-        private void WaitForHostedReferencePoint()
-        {
-            OutputText.text = m_AppMode.ToString();
-
-            CloudReferenceState cloudReferenceState =
-                m_CloudReferencePoint.cloudReferenceState;
-            OutputText.text += " - " + cloudReferenceState.ToString();
-
-            if (cloudReferenceState == CloudReferenceState.Success)
-            {
-                GameObject cloudAnchor = Instantiate(
-                                             HostedPointPrefab,
-                                             Vector3.zero,
-                                             Quaternion.identity);
-                cloudAnchor.transform.SetParent(
-                    m_CloudReferencePoint.transform, false);
-
-                m_AppMode = AppMode.PlayState;
-            }
-
-        }
+        
 
         private void Select()
         {
@@ -120,10 +111,7 @@ namespace com.Ale.Chess
                                 GameObject hitObject = hit.collider.gameObject;
                                 Destroy(hitObject);
                             }
-                            if(hit.collider.gameObject.tag == "WhitePawn")
-                            {
-
-                            }
+                            
 
                         }
                     }
@@ -134,18 +122,51 @@ namespace com.Ale.Chess
         // Update is called once per frame
         void Update()
         {
-            if (m_AppMode == AppMode.TouchToHostCloudReferencePoint)
+            if (placed == false && PhotonNetwork.IsMasterClient)
             {
-                HostCloudReferencePoint();
+                PlaceChessBoard();
             }
-            else if (m_AppMode == AppMode.WaitingForHostedReferencePoint)
+            if (placed)
             {
-                WaitForHostedReferencePoint();
+                if (m_AppMode == AppMode.PlayState)
+                {
+                    Select();
+                }
             }
-            else if (m_AppMode == AppMode.PlayState)
+            
+
+            /*if (PhotonNetwork.IsMasterClient)
             {
-                Select();
-            }
+                if (m_AppMode == AppMode.TouchToHostCloudReferencePoint)
+                {
+                    TouchtoHostCloudReferencePoint();
+                }
+                else if (m_AppMode == AppMode.WaitingForHostedReferencePoint)
+                {
+                    WaitForHostedReferencePoint();
+                }
+                else if (m_AppMode == AppMode.PlayState)
+                {
+                    Select();
+                }
+             
+            } 
+            else
+            {
+                if (m_AppMode == AppMode.TouchToResolveCloudReferencePoint)
+                {
+                    TouchToResolveCloudReferencePoint();
+                }
+                else if (m_AppMode == AppMode.WaitingForResolvedReferencePoint)
+                {
+                    WaitForResolvedReferencePoint();
+                }
+                else if (m_AppMode == AppMode.PlayState)
+                {
+                    Select();
+                }
+            }*/
+            
         }
     }
 

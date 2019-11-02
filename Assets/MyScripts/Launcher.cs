@@ -153,11 +153,11 @@ namespace com.Ale.Chess
             {
                 buttonLoadArena.SetActive(true);
                 buttonJoinRoom.SetActive(false);
-                playerStatus.text = playerNameField.text + " ,you are the Lobby Leader";
+                playerStatus.text = playerNameField.text + ", you are the Lobby Leader";
             }
             else
             {
-                playerStatus.text = playerNameField.text + " ,you are connected to Lobby";
+                playerStatus.text = playerNameField.text + ", you are connected to Lobby";
             }
         }
 
