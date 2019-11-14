@@ -73,7 +73,6 @@ namespace com.Ale.Chess
             }
             PhotonNetwork.NickName = value;
 
-
             PlayerPrefs.SetString(playerNamePrefKey, value);
         }
 

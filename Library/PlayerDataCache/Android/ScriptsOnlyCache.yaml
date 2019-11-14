@@ -114,6 +114,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11256}
     - Class: 114
+      Script: {instanceID: 11298}
+    - Class: 114
       Script: {instanceID: 11322}
     - Class: 114
       Script: {instanceID: 11354}
@@ -438,7 +440,7 @@ ScriptsOnlyBuild:
     className: TMP_ScrollbarEventHandler
   - hash:
       serializedVersion: 2
-      Hash: 09434b81f9e358021719a265dbd7ffb0
+      Hash: 62076a0d9d1b6caf9b2c6de73ce0127e
     assemblyName: Assembly-CSharp.dll
     namespaceName: com.Ale.Chess
     className: AppController

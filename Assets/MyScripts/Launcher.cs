@@ -18,7 +18,7 @@ namespace com.Ale.Chess
         /// </summary>
         [Tooltip("The maximum number of players per room. When a room is full, it can't be joined by new players, and so new room will be created")]
         [SerializeField]
-        private byte maxPlayersPerRoom = 4;
+        private byte maxPlayersPerRoom = 2;
 
         [Tooltip("The Ui Panel to let the user enter name, connect and play")]
         [SerializeField]
@@ -38,6 +38,8 @@ namespace com.Ale.Chess
         [SerializeField]
         private InputField roomNameField;
 
+        
+
         #endregion
 
 
@@ -48,7 +50,6 @@ namespace com.Ale.Chess
         /// This client's version number. Users are separated from each other by gameVersion (which allows you to make breaking changes).
         /// </summary>
         string gameVersion = "1";
-
 
         #endregion
 
@@ -101,15 +102,19 @@ namespace com.Ale.Chess
 
         public void LoadArena()
         {
+            if (PhotonNetwork.IsMasterClient)
+            {
+                if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
+                {
+                    PhotonNetwork.LoadLevel("ARScene");
+                }
+                else
+                {
+                    playerStatus.text = "2 Players required to Load Arena!";
+                }
+            }
             // 5
-            if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
-            {
-                PhotonNetwork.LoadLevel("ARScene");
-            }
-            else
-            {
-                playerStatus.text = "2 Players required to Load Arena!";
-            }
+            
         }
 
         public void JoinRoom()
@@ -118,9 +123,9 @@ namespace com.Ale.Chess
             if (PhotonNetwork.IsConnected)
             {
                 Debug.Log("PhotonNetwork.IsConnected! | Trying to Create/Join Room " + roomName);
-                RoomOptions roomOptions = new RoomOptions(); //2
                 TypedLobby typedLobby = new TypedLobby(roomName, LobbyType.Default); //3
-                PhotonNetwork.JoinOrCreateRoom(roomName, new RoomOptions {MaxPlayers = maxPlayersPerRoom} , typedLobby); //4
+                PhotonNetwork.JoinOrCreateRoom(roomName, new RoomOptions { MaxPlayers = maxPlayersPerRoom } , typedLobby); //4
+                
             }
         }
 
@@ -157,7 +162,10 @@ namespace com.Ale.Chess
             }
             else
             {
+                controlPanel.SetActive(true);
+                buttonLoadArena.SetActive(false);
                 playerStatus.text = playerNameField.text + ", you are connected to Lobby";
+
             }
         }
 
